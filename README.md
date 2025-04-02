@@ -1,4 +1,45 @@
 # CS-4476 Project 1: Convolution and Hybrid Images
+# Hybrid Image Generator
+
+## 📷 Overview
+This project implements hybrid image generation — combining the **low-frequency content** of one image with the **high-frequency content** of another to produce an image that changes interpretation based on viewing distance.
+
+The project is based on the SIGGRAPH 2006 paper: *Hybrid Images* by Oliva, Torralba, and Schyns.
+
+---
+
+## 🧠 Key Concepts
+- **Convolution and Image Filtering** using NumPy and PyTorch
+- **Gaussian Kernel Construction** (1D and 2D)
+- **Hybrid Image Synthesis** with low-pass and high-pass filtering
+- **Fourier Domain Deconvolution** (optional extra credit)
+- **Performance Comparison** between NumPy and PyTorch backends
+
+---
+
+## 💻 Project Structure
+
+### ✅ Part 1: NumPy
+- `create_Gaussian_kernel_1D()`: Generates 1D Gaussian filter
+- `create_Gaussian_kernel_2D()`: Forms 2D filter via outer product
+- `my_conv2d_numpy()`: Manually implements 2D convolution
+- `create_hybrid_image()`: Combines low-pass and high-pass images
+
+### 🔥 Part 2: PyTorch
+- `HybridImageDataset`: PyTorch Dataset to load image pairs and cutoff frequencies
+- `HybridImageModel`: PyTorch model that replicates the hybrid image creation process
+- Uses `torch.nn.functional.conv2d()` for fast filtering
+
+### 🧪 Part 3: Convolution Analysis
+- `my_conv2d_pytorch()`: Re-implements convolution using PyTorch
+- Tests effect of different **stride**, **padding**, and **grouping** values on convolution output shape
+
+### 🌊 Part 4 (Extra Credit): Frequency Domain
+- `my_conv2d_freq()`: Performs convolution using 2D Fourier Transform
+- `my_deconv2d_freq()`: Attempts to deblur image by deconvolving in frequency domain
+
+---
+
 
 ## Getting Started
 
@@ -13,42 +54,6 @@ conda activate cv_assn1
 # install the source code in dev mode
 pip install -e .
 ```
-
-## Logistics
-
-- Submit via [Gradescope](https://gradescope.com).
-- Part 4 of this project is **optional**.
-- Additional information can be found in `docs/project-1.pdf`.
-
-## 4476 Rubric
-
-- +5 pts: `create_Gaussian_kernel_1D()` in `part1.py`
-- +5 pts: `create_Gaussian_kernel_2D()` in `part1.py`
-- +15 pts: `my_conv2d_numpy()` in `part1.py`
-- +10 pts: `create_hybrid_image()` in `part1.py`
-- +5 pts: `make_dataset()` in `part2_datasets.py`
-- +5 pts: `get_cutoff_frequencies()` in `part2_datasets.py`
-- +5 pts: `__len__()` in `part2_datasets.py`
-- +5 pts: `__getitem__()` in `part2_datasets.py`
-- +5 pts: `get_kernel()` in `part2_models.py`
-- +5 pts: `low_pass()` in `part2_models.py`
-- +10 pts: `forward()` in `part2_models.py`
-- +5 pts: `my_conv2d_pytorch()` in `part3.py`
-- +20 pts: Report
-- -5*n pts: Lose 5 points for every time you do not follow the instructions for the hand-in format
-
-
-## Submission format
-
-This is very important as you will lose 5 points for every time you do not follow the instructions.
-
-1. Generate the zip folder (`<your_gt_username>.zip`) for the code portion of your submission once you've finished the project using `python zip_submission.py --gt_username <your_gt_username>`. It should contain:
-    - `src/`: directory containing all your code for this assignment
-    - `cutoff_frequency.txt`: .txt file containing the best cutoff frequency values you found for each pair of images in `data/`
-    - `setup.cfg`: setup file for environment, do not need to change this file
-    - `additional_data/`: (optional) if you use any data other than the images we provide, please include them here
-    - `README.txt`: (optional) if you implement any new functions other than the ones we define in the skeleton code (e.g., any extra credit implementations), please describe what you did and how we can run the code. We will not award any extra credit if we can't run your code and verify the results.
-2. `<your_gt_username>_proj1.pdf` - your report
 
 
 ## Important Notes
