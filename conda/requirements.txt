@@ -1,0 +1,11 @@
+bandit
+flake8
+jupyter
+matplotlib
+mypy
+numpy
+pytest
+pyyaml
+torch
+torchvision
+Pillow
